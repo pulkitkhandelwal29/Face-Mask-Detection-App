@@ -81,7 +81,17 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.black,
             title: Padding(
               padding: EdgeInsets.only(top: 40),
-              child: Center(),
+              child: Center(
+                child: Text(
+                  result,
+                  style: const TextStyle(
+                    backgroundColor: Colors.black,
+                    fontSize: 30,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
           ),
           body: Column(
