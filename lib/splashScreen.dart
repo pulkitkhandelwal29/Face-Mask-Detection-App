@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
+import './homePage.dart';
 
 class MySplashPage extends StatefulWidget {
   const MySplashPage({Key? key}) : super(key: key);
@@ -12,7 +13,8 @@ class _MySplashPageState extends State<MySplashPage> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 4,
+      seconds: 5,
+      navigateAfterSeconds: HomePage(),
       title: Text(
         'Face Mask Detector App',
         style: TextStyle(
