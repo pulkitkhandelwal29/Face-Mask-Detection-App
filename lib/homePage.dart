@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
           if (!isWorking) {
             isWorking = true;
             imgCamera = imageFromStream;
+            runModelOnFrame();
           }
         });
       });
@@ -38,10 +39,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  runModelOnFrame() async {
+    if (imgCamera != null) {
+      var recognitions = await Tflite.runModelOnFrame(
+        bytesList: imgCamera.planes.map((plane) {
+          return plane.bytes;
+        }).toList(),
+        imageHeight: imgCamera.height,
+        imageWidth: imgCamera.width,
+        imageMean: 127.5,
+        imageStd: 127.5,
+        rotation: 90,
+        numResults: 1,
+        threshold: 0.1,
+        asynch: true,
+      );
+      result = "";
+      recognitions!.forEach((response) {
+        result += response['label'] + "\n";
+      });
+      setState(() {
+        result;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     initCamera();
+    loadModel();
   }
 
   @override
